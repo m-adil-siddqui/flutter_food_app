@@ -76,7 +76,7 @@ class CheckOutBottomCard extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                   children: [
                     TextSpan(
-                      text:"${_cartController.totalPrice}",
+                      text:"${_cartController.totalAmount()}",
                       style: TextStyle(fontSize: 17, color: Colors.black),
                     )
                   ]
@@ -94,7 +94,7 @@ class CheckOutBottomCard extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                   children: [
                     TextSpan(
-                      text:"${_cartController.totalPrice}",
+                      text:"${_cartController.totalAmount()}",
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     )
                   ]
