@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/app/modules/login/controllers/login_controller.dart';
-import 'package:food_delivery_app/size_config.dart';
-import 'package:get/get.dart';
+import '../size_config.dart';
 
 class DefaultButton extends StatelessWidget {
   DefaultButton({ Key? key, required this.press, required this.text, this.loader = false}) : super(key: key);

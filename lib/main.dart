@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/theme.dart';
+import './theme.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 

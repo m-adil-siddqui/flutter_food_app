@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import 'package:food_delivery_app/app/modules/cart/bindings/cart_binding.dart';
 import 'package:food_delivery_app/app/modules/cart/views/cart_view.dart';
 import 'package:food_delivery_app/app/modules/category/bindings/category_binding.dart';
 import 'package:food_delivery_app/app/modules/category/views/category_view.dart';
