@@ -14,34 +14,35 @@ class BodyView extends StatelessWidget {
     return SafeArea(
       child: Padding(
       padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
-      child: Obx((){
-        return ListView.separated(
-        itemBuilder: (context, index){
-          return Dismissible(
-            key: Key(UniqueKey().toString()),
-            direction: DismissDirection.endToStart,
-            child: CartItemView(product: _cartController.cartItems[index]),
-            onDismissed: (direction) {
-                _cartController.removeFromCart(_cartController.cartItems[index]);
-            },
-            background: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFE6E6),
-                borderRadius: BorderRadius.circular(15)
-              ),
-              child: Row(
-                children: [
-                  Spacer(),
-                  SvgPicture.asset("assets/images/Trash.svg"),
-                ],
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 15),
-        itemCount: _cartController.cartItems.length);
-      })
+      child: Text("d")
+      // Obx((){
+        // ListView.separated(
+        // itemBuilder: (context, index){
+        //   return Dismissible(
+        //     key: Key(UniqueKey().toString()),
+        //     direction: DismissDirection.endToStart,
+        //     child: CartItemView(product: _cartController.cartList()[index]['item'], qty: _cartController.cartList()[index]['qty']),
+        //     onDismissed: (direction) {
+        //         _cartController.removeFromCart(_cartController.cartList()[index]);
+        //     },
+        //     background: Container(
+        //       padding: EdgeInsets.symmetric(horizontal: 20),
+        //       decoration: BoxDecoration(
+        //         color: Color(0xFFFFE6E6),
+        //         borderRadius: BorderRadius.circular(15)
+        //       ),
+        //       child: Row(
+        //         children: [
+        //           Spacer(),
+        //           SvgPicture.asset("assets/images/Trash.svg"),
+        //         ],
+        //       ),
+        //     ),
+        //   );
+        // },
+        // separatorBuilder: (context, index) => const SizedBox(height: 15),
+        // itemCount: _cartController.cartList().length)
+      // })
       ) 
       );
   }

@@ -19,11 +19,11 @@ class Cart{
     totalQty++; 
     totalPrice += product.price!.toDouble();
 
-    print("-------------- cart status -----");
-    print(items);
-    print(totalPrice);
-    print(totalQty);
-    print("---------cart status end ---------");
+    // print("-------------- cart status -----");
+    // print(items);
+    // print(totalPrice);
+    // print(totalQty);
+    // print("---------cart status end ---------");
   }
 }
 
