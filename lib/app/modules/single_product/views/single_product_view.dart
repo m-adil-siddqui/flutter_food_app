@@ -38,7 +38,7 @@ class SingleProductView extends GetView<SingleProductController> {
                           height: 17,
                           padding: EdgeInsets.all(4),
                           color: Colors.red[400],
-                          child: Text("${_cartController.count}", style: TextStyle(fontSize: 8)),
+                          child: Text("${_cartController.totalQty}", style: TextStyle(fontSize: 8)),
                         ), 
                       ) 
                     )),

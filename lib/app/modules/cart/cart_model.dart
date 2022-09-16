@@ -35,8 +35,8 @@ cartFromJson(jsonString){
   }
 }
 
-Map<String, dynamic> cartToJson(cart){
-  return {
+Map<String, dynamic> cartToJson(cart, pid){
+  return {    
     "items" : cart.items,
     "totalQty" : cart.totalQty,
     "totalPrice" : cart.totalPrice,

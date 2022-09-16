@@ -69,37 +69,37 @@ class CheckOutBottomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Items (${_cartController.count})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-              Text.rich(
+              Obx(() => Text("Items (${_cartController.totalQty})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold))),
+              Obx(() => Text.rich(
                 TextSpan(
                   text: "Rs",
                   style: TextStyle(color: Colors.red),
                   children: [
                     TextSpan(
-                      text:"${_cartController.totalAmount()}",
+                      text:"${_cartController.totalPrice}",
                       style: TextStyle(fontSize: 17, color: Colors.black),
                     )
                   ]
                 )
-              )
+              ))
             ]),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Text("Total Price", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-              Text.rich(
+              Obx(()=> Text.rich(
                 TextSpan(
                   text: "Rs",
                   style: TextStyle(color: Colors.red),
                   children: [
                     TextSpan(
-                      text:"${_cartController.totalAmount()}",
+                      text:"${_cartController.totalPrice}",
                       style: TextStyle(fontSize: 18, color: Colors.black),
                     )
                   ]
                 )
-              )
+              ))
             ]),
           const SizedBox(height: 20),
           DefaultButton(press: (){

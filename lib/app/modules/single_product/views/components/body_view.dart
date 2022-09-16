@@ -17,10 +17,12 @@ class BodyView extends StatefulWidget {
 }
 
 class _BodyViewState extends State<BodyView> {
+
   final _singleProductController = Get.find<SingleProductController>();
   final _cartController = Get.find<CartController>();
   final String? id = Get.parameters['id'];
   
+
   @override
   void initState() {
     Future.delayed(Duration.zero, (){
@@ -29,7 +31,6 @@ class _BodyViewState extends State<BodyView> {
     super.initState();
   }
   int _currentPage = 0;
-  int _qty = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -136,43 +137,41 @@ class _BodyViewState extends State<BodyView> {
                                   ],
                                 ),
                                 const SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: (){
-                                        setState(() {
-                                          _qty++;
-                                        });
-                                      },
-                                      child: const Icon(Icons.add, color: Colors.black),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.grey[200],
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(5)
-                                      ),
-                                    ),
-                                    Text("${_qty < 0 ? 0 : _qty}" , style: const TextStyle(fontSize: 16)),
-                                    ElevatedButton(
-                                      onPressed: (){
-                                        setState(() {
-                                          _qty--;
-                                        });
-                                      },
-                                      child: const Icon(Icons.remove, color: Colors.black),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.grey[200],
-                                        shape: const CircleBorder(),
-                                        padding: const EdgeInsets.all(5)
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Align(
-                                          alignment: Alignment.topRight,
-                                          child:Text("Rs${_singleProductController.product.value?.price}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                Obx(() { 
+                                      var cartItems = _cartController.cartItems;
+                                  return Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: (){
+                                            _cartController.incrementToCart(_singleProductController.product.value);
+                                          },
+                                          child: const Icon(Icons.add, color: Colors.black),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.grey[200],
+                                            shape: const CircleBorder(),
+                                            padding: const EdgeInsets.all(5)
+                                          ),
+                                        ),
+                                        Text("${cartItems.length != 0 && cartItems.contains(_singleProductController.product.value) ? cartItems[cartItems.indexWhere((element) => element.id == _singleProductController.product.value?.id)].qty : 0}", style: const TextStyle(fontSize: 16)),
+                                        ElevatedButton(
+                                          onPressed: (){
+                                            _cartController.decrementToCart(_singleProductController.product.value);
+                                          },
+                                          child: const Icon(Icons.remove, color: Colors.black),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.grey[200],
+                                            shape: const CircleBorder(),
+                                            padding: const EdgeInsets.all(5)
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Align(
+                                              alignment: Alignment.topRight,
+                                              child:Text("Rs${_singleProductController.product.value?.price}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                            )
                                         )
-                                    )
-                                  ]),
+                                      ]);}),
                                 const SizedBox(height: 30),
                                 DefaultButton(press: (){
                                   _cartController.addToCart(_singleProductController.product.value!);

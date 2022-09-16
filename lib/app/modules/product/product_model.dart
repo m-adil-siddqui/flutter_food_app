@@ -6,6 +6,7 @@ class Product {
   num? discount, price;
   String? desc;
   List<dynamic>? images;
+  int qty = 0;
 
   Product(
       {this.id,
@@ -26,6 +27,7 @@ class Product {
     price = json['price'];
     desc = json['desc'];
     images = List<dynamic>.from(json['images'].map((x) => x));
+    qty = 0;
   }
 
   Map<String, dynamic> toJson() {

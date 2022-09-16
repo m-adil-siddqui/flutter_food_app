@@ -26,7 +26,6 @@ class SingleProductController extends GetxController {
       try{
         isLoading.value = true;
         ProductProvider().fetchSingleProduct(id).then((res){
-          print(res.title);
           isLoading.value = false;
           product.value = res;
         },onError: (err){

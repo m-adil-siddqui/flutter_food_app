@@ -6,9 +6,8 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../../../../size_config.dart';
 
 class CartItemView extends StatelessWidget {
-  CartItemView({Key? key, required this.product, required this.qty}) : super(key: key);
+  CartItemView({Key? key, required this.product}) : super(key: key);
   final Product product;
-  final int qty;
   
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,7 @@ class CartItemView extends StatelessWidget {
                       children: [
                         TextSpan(
                           // text: " x${cart.numOfItem}",
-                          text: " x ${qty}",
+                          text: " x ${product.qty}",
                           style: TextStyle(color: Colors.black)
                         )
                       ]
