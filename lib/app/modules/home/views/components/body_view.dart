@@ -22,7 +22,7 @@ class BodyView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            const Text("Let's eat \nquality food 😋", style:  TextStyle(fontWeight: FontWeight.w800, fontSize: 30.0)),
+            const Text("Let's eat \nquality food 😋", style:  TextStyle(fontFamily: 'Nunito-ExtraBold', fontSize: 30.0)),
             const SizedBox(height: 30),
             Obx((){
               if(_homeController.isLoading.value == true){

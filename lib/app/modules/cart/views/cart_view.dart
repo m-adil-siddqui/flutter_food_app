@@ -12,7 +12,7 @@ class CartView extends GetView<CartController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart Food", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text("Cart Food", style: TextStyle(color: Colors.black, fontFamily: 'Nunito-Bold')),
         centerTitle: true,
         actions: [
           Padding(
@@ -69,11 +69,11 @@ class CheckOutBottomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Obx(() => Text("Items (${_cartController.totalQty})", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold))),
+              Obx(() => Text("Items (${_cartController.totalQty})", style: TextStyle(fontSize: 17, fontFamily: 'Nunito-Bold'))),
               Obx(() => Text.rich(
                 TextSpan(
                   text: "Rs",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
                   children: [
                     TextSpan(
                       text:"${_cartController.totalPrice}",
@@ -87,11 +87,11 @@ class CheckOutBottomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
-              Text("Total Price", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+              Text("Total Price", style: TextStyle(fontSize: 18, fontFamily: 'Nunito-Bold')),
               Obx(()=> Text.rich(
                 TextSpan(
                   text: "Rs",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
                   children: [
                     TextSpan(
                       text:"${_cartController.totalPrice}",

@@ -7,8 +7,6 @@ class DefaultButton extends StatelessWidget {
   final Function() press;
   final String text;
   bool loader;
-  // final _loginController = Get.find<LoginController>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +18,8 @@ class DefaultButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           backgroundColor: Colors.redAccent
         ),
-        // child: _loginController.isLoading.value ? 
-        child: loader ? 
+        onPressed: press,
+        child:  loader ? 
         SizedBox(
           width: getScreenWidth(30), 
           height: getScreenHeight(30),
@@ -29,8 +27,7 @@ class DefaultButton extends StatelessWidget {
             strokeWidth: 2.0,
             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
           )) 
-         : Text(text, style: TextStyle(color: Colors.white,fontSize: getScreenWidth(18))),
-        onPressed: press,
+         : Text(text, style: TextStyle(fontFamily: 'Nunito-Bold', color: Colors.white,fontSize: getScreenWidth(16))),
       ),
     );
   }

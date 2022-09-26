@@ -11,7 +11,7 @@ class SearchView extends GetView<SearchController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Food", style: TextStyle(color: Colors.black)),
+        title: const Text("Search Food", style: TextStyle(color: Colors.black, fontFamily: 'Nunito-Bold')),
         centerTitle: true,
         actions: [
           Padding(

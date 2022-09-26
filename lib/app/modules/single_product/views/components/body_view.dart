@@ -121,19 +121,19 @@ class _BodyViewState extends State<BodyView> {
                                 RichText(
                                   text:  TextSpan(
                                     children: [
-                                      TextSpan(text: "${_singleProductController.product.value?.title} \n", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black)),
-                                      TextSpan(text: "${_singleProductController.product.value?.tagline}", style: TextStyle(fontSize: 14, color: Colors.grey))
+                                      TextSpan(text: "${_singleProductController.product.value?.title} \n", style: TextStyle(fontSize: 20, fontFamily: 'Nunito-Bold', color: Colors.black)),
+                                      TextSpan(text: "${_singleProductController.product.value?.tagline}", style: TextStyle(fontSize: 14, fontFamily: 'Nunito-Regular', color: Colors.grey))
                                     ] 
                                     )
                                 ),
                                 const SizedBox(height: 20),
-                                Text("${_singleProductController.product.value?.desc}"),
+                                Text("${_singleProductController.product.value?.desc}", style: TextStyle(fontFamily: 'Nunito-Medium')),
                                 const SizedBox(height: 20),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text("Standard Delivery", style: TextStyle(fontSize: 16)),
-                                    Text("You save ${_singleProductController.product.value?.discount}%", style: TextStyle(fontSize: 13))
+                                    const Text("Standard Delivery", style: TextStyle(fontSize: 16, fontFamily: 'Nunito-Medium')),
+                                    Text("You save ${_singleProductController.product.value?.discount}%", style: TextStyle(fontSize: 13, fontFamily: 'Nunito-Medium'))
                                   ],
                                 ),
                                 const SizedBox(height: 20),
@@ -168,7 +168,7 @@ class _BodyViewState extends State<BodyView> {
                                         Expanded(
                                           child: Align(
                                               alignment: Alignment.topRight,
-                                              child:Text("Rs${_singleProductController.product.value?.price}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                              child:Text("Rs${_singleProductController.product.value?.price}", style: TextStyle(fontSize: 20, fontFamily: 'Nunito-Bold')),
                                             )
                                         )
                                       ]);}),

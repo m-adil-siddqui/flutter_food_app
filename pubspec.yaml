@@ -12,7 +12,9 @@ dependencies:
   hexcolor: ^2.0.6  
   flutter_svg: ^0.22.0
   connectivity_plus: ^2.3.6+1
-  shared_preferences: ^2.0.15
+  image_picker: ^0.8.5+3
+  intl: ^0.17.0
+  flutter_image_compress: ^1.0.0-nullsafety
   flutter: 
     sdk: flutter
 
@@ -27,4 +29,36 @@ flutter:
   assets:
     - assets/images/
   #  - assets/icons/
+
+  fonts:
+    - family: Nunito-italic
+      fonts:
+        - asset: assets/fonts/Nunito-Italic-VariableFont_wght.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-VariableFont_wght.ttf
+
+    - family: Nunito-SemiBold
+      fonts:
+        - asset: assets/fonts/Nunito-SemiBold.ttf  
+
+    - family: Nunito-Bold
+      fonts:
+        - asset: assets/fonts/Nunito-Bold.ttf  
+
+    - family: Nunito-ExtraBold
+      fonts:
+        - asset: assets/fonts/Nunito-ExtraBold.ttf 
+
+    - family: Nunito-Medium
+      fonts:
+        - asset: assets/fonts/Nunito-Medium.ttf 
+
+    - family: Nunito-Regular
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf 
+
+    
+
+        
 

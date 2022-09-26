@@ -51,18 +51,18 @@ class FoodCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Text(title, style: const TextStyle(fontSize: 20, fontWeight:FontWeight.w700), maxLines:2, textAlign: TextAlign.center),
+                      Text(title, style: const TextStyle(fontSize: 18, fontFamily: 'Nunito-Bold'), maxLines:2, textAlign: TextAlign.center),
                       const SizedBox(height: 7),
-                      Text(tagline, style: TextStyle(fontSize: 15, color: Colors.grey), textAlign: TextAlign.center),
+                      Text(tagline, style: TextStyle(fontSize: 15, color: Colors.grey, fontFamily: 'Nunito-Regular'), textAlign: TextAlign.center),
                       const SizedBox(height: 6),
-                      Text("🔥 58 Calories", style: TextStyle(fontSize: 16, color: HexColor("#fb3c54")),
+                      Text("🔥 58 Calories", style: TextStyle(fontSize: 16, color: HexColor("#fb3c54"), fontFamily: 'Nunito-Regular'),
                       ),
                       const SizedBox(height: 5),
                       RichText(
                         text: TextSpan(
                           children: [
-                            TextSpan(text: '\$', style: TextStyle(fontSize: 17, color: HexColor("#fb3c54"))),
-                            TextSpan(text: '${price}', style: TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold)),
+                            TextSpan(text: '\Rs', style: TextStyle(fontSize: 17, color: HexColor("#fb3c54"), fontFamily: 'Nunito-Regular')),
+                            TextSpan(text: '${price}', style: TextStyle(fontSize: 23, color: Colors.black, fontFamily: 'Nunito-Bold')),
                           ]
                           ))
                     ],

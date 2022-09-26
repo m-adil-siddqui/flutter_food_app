@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:food_delivery_app/app/modules/product/product_model.dart';
 import 'package:food_delivery_app/constants.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../../../size_config.dart';
 
 class CartItemView extends StatelessWidget {
-  CartItemView({Key? key, required this.product}) : super(key: key);
+  CartItemView({Key? key, required this.product, this.cartItems}) : super(key: key);
+  final _cartController = Get.find<CartController>();
   final Product product;
+  var cartItems;
   
   @override
   Widget build(BuildContext context) {
@@ -28,14 +32,15 @@ class CartItemView extends StatelessWidget {
           ),
           child: Row(
           children: [
-            SizedBox(
-              width: getScreenWidth(88),
-              child: AspectRatio(
-                aspectRatio: 0.88,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image.network(base_url+"/images${product.images?[0]}"),
-                ),
+            Container(
+              width: getScreenWidth(90),
+              height: getScreenHeight(90),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle, 
+                image: DecorationImage(
+                  image: NetworkImage(base_url+"/images${product.images?[0]}"),
+                  fit: BoxFit.cover
+                )
               ),
             ),
             SizedBox(width: getScreenWidth(20)),
@@ -46,7 +51,7 @@ class CartItemView extends StatelessWidget {
                 SizedBox(
                   width: getScreenWidth(200),
                   child: Text("${product.title}",
-                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      style: TextStyle(color: Colors.black, fontSize: 14, fontFamily: 'Nunito-Medium'),
                       maxLines: 2,
                     ),
                 ), 
@@ -54,67 +59,61 @@ class CartItemView extends StatelessWidget {
                 Row(
                   children: [
                     Text.rich(
-                    TextSpan(
-                      text:"${product.price}",
-                      style:TextStyle(color: Colors.red),
-                      children: [
-                        TextSpan(
-                          // text: " x${cart.numOfItem}",
-                          text: " x ${product.qty}",
-                          style: TextStyle(color: Colors.black)
-                        )
-                      ]
-                    )
-                  ),
+                      TextSpan(
+                        text:"Rs ${product.price}",
+                        style:TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium', fontSize: 13),
+                        // children: [
+                        //   TextSpan(
+                        //     text: " x ${product.qty}",
+                        //     style: TextStyle(color: Colors.black)
+                        //   )
+                        // ]
+                      )
+                   ),
                   SizedBox(width: getScreenWidth(20)),
                   SizedBox(
                     height: getScreenHeight(30),
-                    child:Container(
-                      decoration: BoxDecoration(
-                        color: HexColor("#fb3c54"),
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
+                    child:Row(
+                      children: [
+                        SizedBox(
+                          width: getScreenWidth(20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _cartController.incrementToCart(product);
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary: HexColor("#fb3c54").withOpacity(0), // this is for bg of button
+                              primary: HexColor("#fb3c54").withOpacity(1), // this is for bg of button
                               elevation: 0,
                               minimumSize: Size.zero, 
-                              padding: EdgeInsets.zero,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(0),
-                                    bottomRight: Radius.circular(0),
-                                    topLeft: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20)
-                                  )),
+                              padding: const EdgeInsets.all(2),
+                              shape:  RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                             child: const Icon(Icons.add, color: Colors.white, size: 14),
                           ),
-                          const Text("1", style: TextStyle(color: Colors.white)),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              // side: BorderSide(color: Colors.red, width: 4),
-                              primary: HexColor("#fb3c54").withOpacity(0), // this is for bg of button
-                              // onPrimary: Colors.white, // this is for text color
-                              elevation: 0,
-                              minimumSize: Size.zero, // Set this
-                              padding: EdgeInsets.zero,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                    topLeft: Radius.circular(0),
-                                    bottomLeft: Radius.circular(0)
-                                  )),
-                            ),
-                            child: const Icon(Icons.remove, color: Colors.white, size: 14),
-                          ) 
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: 5),
+                        Obx(() => Text("${cartItems.length != 0 && cartItems.contains(product) ? cartItems[cartItems.indexWhere((element) => element.id == product.id)].qty : 0}", style: const TextStyle(fontSize: 14))),
+                        const SizedBox(width: 5),
+                        SizedBox(
+                          width: getScreenWidth(20),
+                          child: ElevatedButton(
+                          onPressed: () {
+                              _cartController.decrementToCart(product);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor("#fb3c54").withOpacity(1), // this is for bg of button
+                            // onPrimary: Colors.white, // this is for text color
+                            elevation: 0,
+                            minimumSize: Size.zero, // Set this
+                            padding: const EdgeInsets.all(2),
+                            shape:  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          child: const Icon(Icons.remove, color: Colors.white, size: 14),
+                        )
+                        ) 
+                      ],
                     )
                   ),
                 ],

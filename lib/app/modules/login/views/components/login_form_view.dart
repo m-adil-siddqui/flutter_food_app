@@ -47,16 +47,10 @@ class _LoginFormViewState extends State<LoginFormView> {
             ],
           ),
           SizedBox(height: getScreenHeight(20)),
-          // Obx((){
-          //   if(controller.isLoading.value == true){
-          //     return Text("Loading...");
-          //   }else{
-          //     return Text("${controller.userList[0]['full_name']}");
-          //   }
-          // }),
-          DefaultButton(press: (){
-            controller.checkLogin();
-          }, text: "Log in"),
+          Obx(() => DefaultButton(
+            press: (){controller.checkLogin();},
+            text: "Log in",
+            loader: controller.isLoading.value)),
         ],
       ),
     );

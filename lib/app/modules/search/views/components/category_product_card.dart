@@ -45,7 +45,7 @@ class CategoryProductCard extends StatelessWidget {
                                           bottomRight: Radius.circular(4)
                                         )
                                       ),
-                                      child: Text("Pau pau ${product.discount}% OFF", style: TextStyle(color: Colors.white)),
+                                      child: Text("Pau pau ${product.discount}% OFF", style: TextStyle(color: Colors.white, fontFamily: 'Nunito-Regular')),
                                     ),
                                   ), 
                                   Padding(
@@ -69,16 +69,16 @@ class CategoryProductCard extends StatelessWidget {
                           children: [
                             Container(
                               width: getScreenWidth(270),
-                              child: Text(product.title.toString(), style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold), maxLines: 1),
+                              child: Text(product.title.toString(), style: TextStyle(fontSize: 17, fontFamily: 'Nunito-Bold'), maxLines: 1),
                             ),
                             Row(children:  [
                               Icon(Icons.star, color: HexColor("#fb3c54"), size: 18),
-                              Text("4.1")
+                              Text("4.1", style: TextStyle(fontFamily: 'Nunito-Medium'))
                             ],)  
                           ],
                         ), 
-                        Text(product.tagline.toString(), style: TextStyle(color: Colors.black54, fontSize: 13)),
-                        Text("Rs ${product.price}", style: TextStyle(color: Colors.black54, fontSize: 13)),
+                        Text(product.tagline.toString(), style: TextStyle(color: Colors.black54, fontSize: 13, fontFamily: 'Nunito-Regular')),
+                        Text("Rs ${product.price}", style: TextStyle(color: Colors.black54, fontSize: 13, fontFamily: 'Nunito-Medium')),
                       ],
                     ),
       ),

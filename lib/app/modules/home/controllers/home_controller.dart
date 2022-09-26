@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/app/config/helper.dart';
+import 'package:food_delivery_app/app/modules/cart/controllers/cart_controller.dart';
 import 'package:food_delivery_app/app/modules/category/providers/category_provider.dart';
 import 'package:food_delivery_app/app/modules/product/product_model.dart';
 import 'package:food_delivery_app/app/modules/product/providers/product_provider.dart';
 import 'package:get/get.dart';
 
+import '../../../config/api_token.dart';
 import '../../category/category_model.dart';
 
 class HomeController extends GetxController {
@@ -17,8 +19,9 @@ class HomeController extends GetxController {
 
   final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    // print( await isTokenValid());
     fetchCategories();
     fetchProducts();
   }

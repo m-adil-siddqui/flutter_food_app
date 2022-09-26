@@ -29,7 +29,7 @@ class Tabs extends StatelessWidget {
                       Image.asset(img, width: getScreenWidth(40)),
                       // Image.network(App.base_url+"/images"+img, width: getScreenWidth(40)),
                       const SizedBox(width: 10),
-                      Text(name.toUpperCase(), style: const TextStyle(color: Colors.black ,fontSize: 16, fontWeight: FontWeight.bold))
+                      Text(name, style: const TextStyle(color: Colors.black ,fontSize: 16, fontFamily: 'Nunito-Bold'))
                      
                     ]),
                 )

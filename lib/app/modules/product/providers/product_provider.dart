@@ -18,7 +18,7 @@ class ProductProvider extends GetConnect {
   }
 
   Future<Product?> getProduct(int id) async {
-    final response = await get('product/$id');
+    final response = await get('product/$id').timeout(Duration(seconds: 30));
     return response.body;
   }
 
@@ -28,7 +28,7 @@ class ProductProvider extends GetConnect {
 
   Future<List<Product>> getProducts() async{
     try{
-      final response = await get('https://n-online-food-delivery.herokuapp.com/api/product');
+      final response = await get('https://n-online-food-delivery.herokuapp.com/api/product').timeout(Duration(seconds: 30));
       
       if(response.status.hasError){
         return Future.error(response.statusText!);
@@ -46,7 +46,7 @@ class ProductProvider extends GetConnect {
 
   Future<List<Product>> searchProducts(query) async{
     try{
-      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/search/${query}");
+      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/search/${query}").timeout(Duration(seconds: 30));
       if(response.status.hasError){
         return Future.error(response.statusText!);
       }else{
@@ -61,7 +61,7 @@ class ProductProvider extends GetConnect {
   // 
   Future<List<Product>> fetchProductsByCategory(id) async{
      try{
-      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/by-category/${id}");
+      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/by-category/${id}").timeout(Duration(seconds: 30));
       if(response.status.hasError){
         return Future.error(response.statusText!);
       }else{
@@ -74,7 +74,7 @@ class ProductProvider extends GetConnect {
 
   Future<Product> fetchSingleProduct(id) async{
     try{
-      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/${id}");
+      final response = await get("https://n-online-food-delivery.herokuapp.com/api/product/${id}").timeout(Duration(seconds: 30));
       if(response.status.hasError){
         return Future.error(response.statusText!);
       }else{

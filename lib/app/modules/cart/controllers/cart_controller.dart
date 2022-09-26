@@ -9,6 +9,7 @@ class CartController extends GetxController {
   double get totalPrice => cartItems.fold(0, (sum, item) => sum + (item.price!.toDouble() * item.qty));
   num get totalQty => cartItems.fold(0, (sum, item) => sum + item.qty);
 
+  
   @override
   void onInit() async{
     super.onInit();

@@ -24,7 +24,7 @@ class CategoryProvider extends GetConnect {
 
   Future getCategories() async{
     try{
-      final response = await get('https://n-online-food-delivery.herokuapp.com/api/category');
+      final response = await get('https://n-online-food-delivery.herokuapp.com/api/category').timeout(Duration(seconds: 30));
       if(response.status.hasError){
         return Future.error(response.statusText!);
       }else{

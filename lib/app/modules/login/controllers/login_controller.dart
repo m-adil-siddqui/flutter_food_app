@@ -1,28 +1,76 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/app/modules/login/providers/login_provider.dart';
 import 'package:food_delivery_app/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+import '../../../config/api_token.dart';
 import '../../../config/helper.dart';
 import '../user_model.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
 
-class LoginController extends GetxController {
+
+class LoginController extends GetxController with CacheManager {
 
   Rxn<User> user = Rxn<User>();
   var isLoading = RxBool(false);
+  var isTokenExpire = false.obs;
 
+  var selectedImagePath = ''.obs;
+  var selectedImageSize = ''.obs;
 
 
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  late final TextEditingController emailController, passwordController;
-  var email = '';
+  late final TextEditingController emailController, passwordController, fullNameController, phoneController, dobController;
+  
+  var email    = '';
   var password = '';
+  var fullName = '';
+  var phone    = '';
+  var dob      = '';
 
-  final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
-    emailController = TextEditingController();
+    emailController    = TextEditingController();
     passwordController = TextEditingController();
+    fullNameController = TextEditingController();
+    phoneController    = TextEditingController();
+    dobController      = TextEditingController();
+
+  }
+
+
+   
+
+  void getImage(ImageSource imageSource) async{
+    final pickedFile = await ImagePicker().pickImage(source: imageSource);
+    if(pickedFile != null){
+      selectedImagePath.value = pickedFile.path;
+      Future.delayed(const Duration(milliseconds: 500), (){
+         Get.back();
+      });
+    }else{
+      showSnackBar("Message", "No image is selected", Colors.black);
+    }
+  }
+
+  void  checkApiTokenStatus() async {
+    isTokenExpire.value = await isTokenValid();
+    if(!isTokenExpire.value){
+      removeKey("user");
+    }
+  }
+
+  void getUserFromStorage() async{
+      var u = await getUserInfo;
+      if(u != null){
+        user.value =  User.fromJson(jsonDecode(u));
+      }
   }
 
   @override
@@ -30,16 +78,24 @@ class LoginController extends GetxController {
     super.onReady();
   }
 
+
   @override
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
   }
-  // void increment() => count.value++;
 
   String? validateEmail(String val){
     if(!GetUtils.isEmail(val)){
       return "Enter a valid email";
+    }else{
+      return null;
+    }
+  }
+
+  String? validateFullName(String val){
+    if(val == ""){
+      return "Your name is required";
     }else{
       return null;
     }
@@ -55,8 +111,6 @@ class LoginController extends GetxController {
   }
 
   void checkLogin(){
-        // removeToken();
-
     final isValid = loginFormKey.currentState!.validate();
     if(!isValid){
       return;
@@ -70,15 +124,69 @@ class LoginController extends GetxController {
     try{
 
       isLoading.value = true;
-      var resp =  LoginProvider().login({
-        'email' : emailController.text,//emailController.value,
-        'password' : passwordController.text
-      })      
-      .then((resp){
+      // var resp =  LoginProvider().login({
+      //   'email' : emailController.text,//emailController.value,
+      //   'password' : passwordController.text
+      // })      
+      // .then((resp) async{
+      //   isLoading.value = false;
+
+      //   setToken("api_token", resp.body['data']['token']);
+      //   setToken("user", jsonEncode(resp.body['data']['user']));
+      //   var u = await getUserInfo;
+      //   user.value = User.fromJson(jsonDecode(u!));
+      //   // print(jsonEncode(resp.body['data']['user']));
+        
+      //   // Get.find<LoginController>().checkApiTokenStatus(); 
+      //   isTokenExpire.value = true; 
+      //   //      
+      //   Get.offAllNamed(Routes.HOME);
+        
+      // }, onError: (err){
+      //   isLoading.value = false;
+      //   print(err.toString());
+      //   showSnackBar("Exception!", err.toString(), Colors.red);
+      // }
+      // );
+    }catch(e){
+      isLoading.value=false;
+      showSnackBar("Exception!", e.toString(), Colors.red);
+    }
+  }
+
+
+
+  editProfile() async {
+    try{
+
+      isLoading.value = true;
+      // final dir = await Directory.systemTemp;
+      // final targetPath = dir.absolute.path + "/temp.jpg";
+
+      // var compressedFile = await FlutterImageCompress.compressAndGetFile(
+        // selectedImagePath.value, targetPath, quality: 88);
+
+      var fomrData = {
+        // 'image' : MultipartFile(compressedFile, filename: 'profile_photo.jpg'),
+        'full_name' : fullNameController.text,
+        'email' : emailController.text,
+        'phone' : phoneController.text,
+        'dob' : dobController.text,
+      };
+
+      var resp =  LoginProvider().editProfile(fomrData, "62b85a2ea0d79bfb4ac43558")      
+      .then((resp) async{
         isLoading.value = false;
-        user.value = resp;
-        Get.toNamed(Routes.CART);
-        // Get.offAllNamed(Routes.CART);
+
+        // setToken("api_token", resp.body['data']['token']);
+        // setToken("user", jsonEncode(resp.body['data']['user']));
+        print(resp.body);
+        // var u = await getUserInfo;
+        // user.value = User.fromJson(jsonDecode(u!));
+        
+        //      
+        // Get.offAllNamed(Routes.HOME);
+        
       }, onError: (err){
         isLoading.value = false;
         print(err.toString());
@@ -87,8 +195,15 @@ class LoginController extends GetxController {
       );
     }catch(e){
       isLoading.value=false;
-      showSnackBar("Exception!", e.toString(), Colors.red);
+      showSnackBar("Exception", e.toString(), Colors.red);
     }
+  }
+
+  void logout(){
+    removeKey("api_token");
+    removeKey("user");
+    isTokenExpire.value = false; 
+  
   }
 }
 

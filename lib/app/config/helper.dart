@@ -8,6 +8,6 @@ showSnackBar(String title, String message, Color backgroundColor){
   snackPosition: SnackPosition.BOTTOM,
   forwardAnimationCurve: Curves.easeOutBack,
   colorText: Colors.white,
-  duration: Duration(seconds: 4),
+  duration: const Duration(seconds: 4),
   );
 }

@@ -22,7 +22,7 @@ class BodyView extends StatelessWidget {
           return Dismissible(
             key: Key(UniqueKey().toString()),
             direction: DismissDirection.endToStart,
-            child: CartItemView(product: _cartController.cartItems[index]),
+            child: CartItemView(product: _cartController.cartItems[index], cartItems: _cartController.cartItems),
             onDismissed: (direction) {
                 _cartController.removeFromCart(_cartController.cartItems[index]);
             },
