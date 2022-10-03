@@ -44,11 +44,10 @@ class BodyView extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: Obx((){
-                      // if(_loginController.user.value?.photo != ''){
-                      //   return Image.network(base_url+"${_loginController.user.value?.photo}", fit:BoxFit.cover);
-                      // }  
-                      // else 
-                      if(_loginController.selectedImagePath.value == ''){
+                      if(_loginController.user.value?.photo != ''){
+                        return Image.network(local_base_url+"${_loginController.user.value?.photo}", fit:BoxFit.cover);
+                      }  
+                      else if(_loginController.selectedImagePath.value == ''){
                         return Image.asset("assets/images/profile_avatar.png", fit:BoxFit.cover);
                       }else{
                         return Image.file(File(_loginController.selectedImagePath.value), fit:BoxFit.cover);

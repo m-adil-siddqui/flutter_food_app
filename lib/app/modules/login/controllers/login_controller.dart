@@ -124,30 +124,30 @@ class LoginController extends GetxController with CacheManager {
     try{
 
       isLoading.value = true;
-      // var resp =  LoginProvider().login({
-      //   'email' : emailController.text,//emailController.value,
-      //   'password' : passwordController.text
-      // })      
-      // .then((resp) async{
-      //   isLoading.value = false;
+      var resp =  LoginProvider().login({
+        'email' : emailController.text,//emailController.value,
+        'password' : passwordController.text
+      })      
+      .then((resp) async{
+        isLoading.value = false;
 
-      //   setToken("api_token", resp.body['data']['token']);
-      //   setToken("user", jsonEncode(resp.body['data']['user']));
-      //   var u = await getUserInfo;
-      //   user.value = User.fromJson(jsonDecode(u!));
-      //   // print(jsonEncode(resp.body['data']['user']));
+        setToken("api_token", resp.body['data']['token']);
+        setToken("user", jsonEncode(resp.body['data']['user']));
+        var u = await getUserInfo;
+        user.value = User.fromJson(jsonDecode(u!));
+        // print(jsonEncode(resp.body['data']['user']));
         
-      //   // Get.find<LoginController>().checkApiTokenStatus(); 
-      //   isTokenExpire.value = true; 
-      //   //      
-      //   Get.offAllNamed(Routes.HOME);
+        // Get.find<LoginController>().checkApiTokenStatus(); 
+        isTokenExpire.value = true; 
+        //      
+        Get.offAllNamed(Routes.HOME);
         
-      // }, onError: (err){
-      //   isLoading.value = false;
-      //   print(err.toString());
-      //   showSnackBar("Exception!", err.toString(), Colors.red);
-      // }
-      // );
+      }, onError: (err){
+        isLoading.value = false;
+        print(err.toString());
+        showSnackBar("Exception!", err.toString(), Colors.red);
+      }
+      );
     }catch(e){
       isLoading.value=false;
       showSnackBar("Exception!", e.toString(), Colors.red);
@@ -164,25 +164,30 @@ class LoginController extends GetxController with CacheManager {
       // final targetPath = dir.absolute.path + "/temp.jpg";
 
       // var compressedFile = await FlutterImageCompress.compressAndGetFile(
-        // selectedImagePath.value, targetPath, quality: 88);
+      //   selectedImagePath.value, targetPath, quality: 88);
 
-      var fomrData = {
-        // 'image' : MultipartFile(compressedFile, filename: 'profile_photo.jpg'),
+// Connection closed before full header was received
+
+      var formInfo = {
+        "id"        : user.value?.id,
         'full_name' : fullNameController.text,
-        'email' : emailController.text,
-        'phone' : phoneController.text,
-        'dob' : dobController.text,
+        'email'     : emailController.text,
+        'phone'     : phoneController.text,
+        'dob'       : dobController.text,
       };
 
-      var resp =  LoginProvider().editProfile(fomrData, "62b85a2ea0d79bfb4ac43558")      
+      
+      
+      LoginProvider().editProfile(formInfo,  selectedImagePath.value)      
       .then((resp) async{
         isLoading.value = false;
 
-        // setToken("api_token", resp.body['data']['token']);
-        // setToken("user", jsonEncode(resp.body['data']['user']));
+        setToken("user", jsonEncode(resp.body['user']));
         print(resp.body);
-        // var u = await getUserInfo;
-        // user.value = User.fromJson(jsonDecode(u!));
+        var updatedUser = await getUserInfo;
+        if(updatedUser != null){
+          user.value = User.fromJson(jsonDecode(updatedUser));
+        }
         
         //      
         // Get.offAllNamed(Routes.HOME);

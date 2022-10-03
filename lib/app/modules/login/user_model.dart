@@ -1,4 +1,5 @@
 class User {
+  String? id;
   String? full_name;
   String? email;
   String? phone;
@@ -6,9 +7,10 @@ class User {
   String? photo;
   String? token;
 
-  User({this.full_name, this.email, this.phone, this.token, this.dob, this.photo});
+  User({this.full_name, this.email, this.phone, this.token, this.dob, this.photo, this.id});
 
    User.fromJson(Map<String, dynamic> json) {
+      id = json['_id'];
       full_name = json['full_name'];
       email = json['email'];
       phone = json['phone_number'] ?? '';
@@ -19,6 +21,7 @@ class User {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['_id'] = id;
     data['full_name'] = full_name;
     data['email'] = email;
     data['dob']   = dob;
