@@ -1,14 +1,12 @@
 import 'package:get/get.dart';
 
 import '../../login/providers/login_provider.dart';
-import '../controllers/edit_profile_controller.dart';
+import '../controllers/edit_password_controller.dart';
 
-class EditProfileBinding extends Bindings {
+class EditPasswordBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LoginProvider>(() => LoginProvider());
-    Get.lazyPut<EditProfileController>(
-      () => EditProfileController(),
-    );
+    Get.lazyPut<EditPasswordController>(() => EditPasswordController());
   }
 }

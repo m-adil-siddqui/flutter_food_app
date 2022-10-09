@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/app/modules/edit_profile/controllers/edit_profile_controller.dart';
 import 'package:food_delivery_app/app/modules/login/controllers/login_controller.dart';
 import 'package:food_delivery_app/components/default_button.dart';
 import 'package:food_delivery_app/constants.dart';
@@ -45,7 +44,7 @@ class BodyView extends StatelessWidget {
                     child: ClipOval(
                       child: Obx((){
                       if(_loginController.user.value?.photo != ''){
-                        return Image.network(local_base_url+"${_loginController.user.value?.photo}", fit:BoxFit.cover);
+                        return Image.network(localBaseUrl+"${_loginController.user.value?.photo}", fit:BoxFit.cover);
                       }  
                       else if(_loginController.selectedImagePath.value == ''){
                         return Image.asset("assets/images/profile_avatar.png", fit:BoxFit.cover);

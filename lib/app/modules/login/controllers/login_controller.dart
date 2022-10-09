@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../../config/api_token.dart';
 import '../../../config/helper.dart';
 import '../user_model.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+// import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
 
@@ -103,8 +103,8 @@ class LoginController extends GetxController with CacheManager {
 
 
   String? validatePassword(String val){
-    if(val.length < 6){
-      return "Password must be of 6 characters";
+    if(val.length < 8){
+      return "Password must be of 8 characters";
     }else{
       return null;
     }
@@ -124,8 +124,10 @@ class LoginController extends GetxController with CacheManager {
     try{
 
       isLoading.value = true;
-      var resp =  LoginProvider().login({
-        'email' : emailController.text,//emailController.value,
+      final loginProvider = Get.find<LoginProvider>();
+
+      var resp =  loginProvider.login({
+        'email' : emailController.text,
         'password' : passwordController.text
       })      
       .then((resp) async{
@@ -177,8 +179,10 @@ class LoginController extends GetxController with CacheManager {
       };
 
       
+      final loginProvider = Get.find<LoginProvider>();
+
       
-      LoginProvider().editProfile(formInfo,  selectedImagePath.value)      
+      loginProvider.editProfile(formInfo,  selectedImagePath.value)      
       .then((resp) async{
         isLoading.value = false;
 

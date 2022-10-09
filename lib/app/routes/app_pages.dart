@@ -1,3 +1,5 @@
+import 'package:food_delivery_app/app/modules/edit_password/bindings/edit_password_binding.dart';
+import 'package:food_delivery_app/app/modules/edit_password/views/edit_password_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/cart/views/cart_view.dart';
@@ -38,7 +40,7 @@ class AppPages {
     GetPage(
         name: _Paths.LOGIN,
         page: () => LoginView(),
-        // binding: LoginBinding(),
+        binding: LoginBinding(),
         transition: Transition.leftToRight),
     GetPage(
         name: _Paths.CART,
@@ -86,5 +88,11 @@ class AppPages {
       binding: EditProfileBinding(),
       transition: Transition.leftToRight
     ),
+    GetPage(
+      name: _Paths.EDIT_PASSWORD,
+      page: () => const EditPasswordView(),
+      binding: EditPasswordBinding(),
+      transition: Transition.leftToRight
+    )
   ];
 }

@@ -110,7 +110,9 @@ class BodyView extends StatelessWidget {
               Get.toNamed(Routes.EDIT_PROFILE);
             }, heading: "Edit Profile"),
             const SizedBox(height: 10),
-            OtherCard(icon: Icons.key, press: (){}, heading: "Change Password"),
+            OtherCard(icon: Icons.key, press: (){
+              Get.toNamed(Routes.EDIT_PASSWORD);
+            }, heading: "Change Password"),
             const SizedBox(height: 10),
             OtherCard(icon: Icons.logout_rounded, press: (){
               _loginController.logout();
