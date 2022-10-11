@@ -15,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 
 class LoginController extends GetxController with CacheManager {
 
+  var currentIndex = 0.obs;
   Rxn<User> user = Rxn<User>();
   var isLoading = RxBool(false);
   var isTokenExpire = false.obs;
@@ -41,7 +42,6 @@ class LoginController extends GetxController with CacheManager {
     fullNameController = TextEditingController();
     phoneController    = TextEditingController();
     dobController      = TextEditingController();
-
   }
 
 
@@ -180,7 +180,6 @@ class LoginController extends GetxController with CacheManager {
 
       
       final loginProvider = Get.find<LoginProvider>();
-
       
       loginProvider.editProfile(formInfo,  selectedImagePath.value)      
       .then((resp) async{
@@ -212,7 +211,15 @@ class LoginController extends GetxController with CacheManager {
     removeKey("api_token");
     removeKey("user");
     isTokenExpire.value = false; 
+  }
+
+  changeTab(index){
   
+    if(index != 0 && !isTokenExpire.value){
+      Get.toNamed(Routes.LOGIN);
+    }else{
+      currentIndex.value = index; 
+    }
   }
 }
 

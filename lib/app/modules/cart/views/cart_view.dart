@@ -69,15 +69,15 @@ class CheckOutBottomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Obx(() => Text("Items (${_cartController.totalQty})", style: TextStyle(fontSize: 17, fontFamily: 'Nunito-Bold'))),
+              Obx(() => Text("Items (${_cartController.totalQty})", style: const TextStyle(fontSize: 17, fontFamily: 'Nunito-Bold'))),
               Obx(() => Text.rich(
                 TextSpan(
                   text: "Rs",
-                  style: TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
+                  style: const TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
                   children: [
                     TextSpan(
                       text:"${_cartController.totalPrice}",
-                      style: TextStyle(fontSize: 17, color: Colors.black),
+                      style: const TextStyle(fontSize: 17, color: Colors.black),
                     )
                   ]
                 )
@@ -87,15 +87,15 @@ class CheckOutBottomCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
-              Text("Total Price", style: TextStyle(fontSize: 18, fontFamily: 'Nunito-Bold')),
+              const Text("Total Price", style: TextStyle(fontSize: 18, fontFamily: 'Nunito-Bold')),
               Obx(()=> Text.rich(
                 TextSpan(
                   text: "Rs",
-                  style: TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
+                  style: const TextStyle(color: Colors.red, fontFamily: 'Nunito-Medium'),
                   children: [
                     TextSpan(
                       text:"${_cartController.totalPrice}",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                      style: const TextStyle(fontSize: 18, color: Colors.black),
                     )
                   ]
                 )
